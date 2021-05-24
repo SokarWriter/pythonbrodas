@@ -1,8 +1,7 @@
 def triangulo (letter, size):
     angulo = ""
     for u in range (size):
-        angulo = "\t" + angulo + letter * size
-        for u in range (size):
-            print (angulo)
+        angulo = angulo + letter
+        print (angulo)
 
 triangulo ("#", 5)
