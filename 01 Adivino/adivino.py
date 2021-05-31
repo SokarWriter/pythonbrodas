@@ -1,9 +1,9 @@
-def random_number(result)
+def random_number(result):
     from random import *
 
 print(randint(1, 100))
 
-result = random_number
+result = random_number (9)
 trys = 5
 max_value = 100
 #---------------------------------------------------------------------------------------------------------------#
