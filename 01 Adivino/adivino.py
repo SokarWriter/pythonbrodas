@@ -1,7 +1,12 @@
-result = 20
+def random_number(result)
+    from random import *
+
+print(randint(1, 100))
+
+result = random_number
 trys = 5
 max_value = 100
-
+#---------------------------------------------------------------------------------------------------------------#
 def inicio(saludo):
     print ("hola", saludo)
 
@@ -14,7 +19,7 @@ saludo = input ()
 print ("recuerda que debes pensar bien tu pregunta.. solo dispones de 5 intentos para conseguirlo")
 advertencia = input ()
 print ("")
-
+#---------------------------------------------------------------------------------------------------------------#
 while True:
     value = raw_input(5)
     try:
