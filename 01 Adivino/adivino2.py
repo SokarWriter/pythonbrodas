@@ -2,8 +2,9 @@ from random import randint
 #recoger trys del parametro
 trys = 3
 num_trys = 0
+current = None
 #recoger num_max del parametro
-num_max = 100
+num_max = 1004
 #generar numero aleatorio entre 0 - num_max
 result = randint(0, num_max)
 
@@ -18,29 +19,31 @@ print ("")
 while True: 
     trys_left = trys - num_trys
     print("Intentos: "+str(trys_left))
+    last_try = current
     #pedir al usuario su num
-    num = int (input())
+    current = int (input())
     #por cada input del jugon 1 try - (num_trys: num_trys += 1)
     num_trys = num_trys + 1
     #comprobar el input del jugon si es el correcto
     if num_trys == trys:
         print("You lose")
         break
-
-    if num == result:
+    #si el num es correcto "gana" 
+    if current == result:
         print("you win")
         break
-    if num > num_max:
+    if current > num_max:
         print("Te has pasado pero si sgues intentandolo el resultado es inferior a " + str (num_max) )
-        
+    #si no acierta en el primer try la pista es "templado"    
     elif num_trys == 1: 
         print("Templado")
-    # ha surgido un problema, tmb tiene que comprobar si se ha pasado 
+    print("intento anterior: "+str(last_try))
+
+    #|(result - current)|<|(result - last_try)| valor absoluto || abs()
+    #ha surgido un problema, tmb tiene que comprobar si se ha pasado 
     
 
 #comprobar el input del jugon si es el correcto
-    #si el num es correcto "gana" 
-    #si no acierta en el primer try la pista es "templado"
     #si no acierta en el resto de trys la pista es "frio" si el num que a dicho esta mas lejos que el num que dijo en el try anterior.
     #si no acierta en el resto de trys la pista es "caliente" si el num que a dicho esta mas cerca que el num que dijo en el try anterior.
 
