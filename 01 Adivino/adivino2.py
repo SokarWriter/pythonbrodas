@@ -1,6 +1,6 @@
 from random import randint 
 #recoger trys del parametro
-trys = 20
+trys = 3
 num_trys = 0
 #recoger num_max del parametro
 num_max = 100
@@ -10,17 +10,23 @@ result = randint(0, num_max)
 print(result)
 #menu de incio
 print ("¿¿Hola jugador, tu mision es adivinar el numero en el que piensa la maquina...podras hacerlo??")
-saludo = input ()
+#saludo = input ()
 print ("recuerda que debes pensar bien tu pregunta.. solo dispones de " + str(trys) + " intentos para conseguirlo")
-advertencia = input ()
+#advertencia = input ()
 print ("")
 #entramos partida
 while True: 
+    trys_left = trys - num_trys
+    print("Intentos: "+str(trys_left))
     #pedir al usuario su num
     num = int (input())
     #por cada input del jugon 1 try - (num_trys: num_trys += 1)
     num_trys = num_trys + 1
     #comprobar el input del jugon si es el correcto
+    if num_trys == trys:
+        print("You lose")
+        break
+
     if num == result:
         print("you win")
         break
