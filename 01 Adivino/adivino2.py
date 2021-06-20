@@ -1,6 +1,6 @@
 from random import randint 
 #recoger trys del parametro
-trys = 3
+trys = 10
 num_trys = 0
 current = None
 #recoger num_max del parametro
@@ -37,7 +37,17 @@ while True:
     #si no acierta en el primer try la pista es "templado"    
     elif num_trys == 1: 
         print("Templado")
-    print("intento anterior: "+str(last_try))
+    
+    elif abs(result - current) < abs(result - last_try):    
+            print("Caliente")
+    
+    elif abs(result - current) > abs(result - last_try):    
+            print("Frio")
+    
+    
+    #print(abs(result - current))
+    #print("intento anterior: "+str(last_try))
+
 
     #|(result - current)|<|(result - last_try)| valor absoluto || abs()
     #ha surgido un problema, tmb tiene que comprobar si se ha pasado 
