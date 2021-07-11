@@ -27,69 +27,80 @@ def interface_initial_game(trys) :
     print ("recuerda que debes pensar bien tu pregunta.. solo dispones de " + str(trys) + " intentos para conseguirlo")
     #advertencia = input ()
     print ("")
- 
-trys, num_max = config_game()
-num_trys, current, result = init_game()
-interface_initial_game(trys)
-
-
-
 
 def init_round(trys, num_trys, current) :
     trys_left = trys - num_trys
     print("Intentos: "+str(trys_left))
     last_try = current
+
     return last_try, trys_left
 
-
-
-while True: 
-    trys_left = trys - num_trys
-    print("Intentos: "+str(trys_left))
-    last_try = current
-    #pedir al usuario su num
+def player_input():
     try:
         current = int (input())
     except ValueError:
         print("solo acepto numeros, gracias")
-        continue
+        current = player_input()
+    return current
 
-    #por cada input del jugon 1 try - (num_trys: num_trys += 1)
-    num_trys = num_trys + 1
-    #comprobar el input del jugon si es el correcto
-    if num_trys == trys:
-        print("You lose")
-        break
-    #si el num es correcto "gana" 
-    if current == result:
-        print("you win")
-        break
+def interface_mid_game(current, num_max, num_trys, result, last_try):
     if current > num_max:
-        print("Te has pasado pero si sgues intentandolo el resultado es inferior a " + str (num_max) )
-    #si no acierta en el primer try la pista es "templado"    
+        print("Te has pasado pero si sgues intentandolo el resultado es inferior a " + str (num_max) )    
     elif num_trys == 1: 
         print("Templado")
-    #si no acierta en el resto de trys la pista es "caliente" si el num que a dicho esta mas cerca que el num que dijo en el try anterior.
     elif abs(result - current) < abs(result - last_try):    
             print("Caliente")
-    #si no acierta en el resto de trys la pista es "frio" si el num que a dicho esta mas lejos que el num que dijo en el try anterior.
     elif abs(result - current) > abs(result - last_try):    
             print("Frio")
+
+def interface_end_game(num_trys, trys, current, result):
+    is_finished = False
+    if num_trys == trys:
+        print("You lose")
+        is_finished = True  
+    if current == result:
+        print("you win")
+        is_finished = True  
+        return is_finished
+
+def interface_replay_game():
+    print("Quieres volver a jugar? SI o NO)")
+    if  input().upper() == "SI":
+        num_trys, current, result = init_game()
+        game_engine(trys, num_trys, current, num_max, result)
+        interface_replay_game()
+    else:
+        print( "Adios!") 
+
+def game_engine(trys, num_trys, current, num_max, result):
+    interface_initial_game(trys)
+    while True: 
+        last_try, try_left = init_round(trys, num_trys, current)
+        current = player_input()
+        num_trys = num_trys + 1
+        is_finished = interface_end_game(num_trys, trys, current, result)
+        if  is_finished == True:
+            break
+        interface_mid_game(current, num_max, num_trys, result, last_try)
+
+
+
+trys, num_max = config_game()
+num_trys, current, result = init_game()
+
+game_engine(trys, num_trys, current, num_max, result)
+interface_replay_game() 
+
+
+
+    
+
+       
+   
     
     
-    #print(abs(result - current))
-    #print("intento anterior: "+str(last_try))
-
-
-    #|(result - current)|<|(result - last_try)| valor absoluto || abs()
-    #ha surgido un problema, tmb tiene que comprobar si se ha pasado 
     
-
     
-
-#hacer print score + print inputs jugon.
-#vuelve al menu de inicio: para elegir volver a jugar 
-
 
 
 
