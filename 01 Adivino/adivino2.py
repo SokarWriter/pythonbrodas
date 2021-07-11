@@ -1,26 +1,48 @@
 import sys
 from random import randint 
-print (sys.argv)
-if len(sys.argv) == 3:
-    num_max = int(sys.argv[1])
-    trys = int(sys.argv[2])
-#recoger trys del parametro
-else:
-     trys = 10
-     num_max = 200
 
-num_trys = 0
-current = None
-result = randint(0, num_max)
 
-print(result)
-#menu de incio
-print ("¿¿Hola jugador, tu mision es adivinar el numero en el que piensa la maquina...podras hacerlo??")
-#saludo = input ()
-print ("recuerda que debes pensar bien tu pregunta.. solo dispones de " + str(trys) + " intentos para conseguirlo")
-#advertencia = input ()
-print ("")
-#entramos partida
+def config_game() :
+    print (sys.argv)
+    if len(sys.argv) == 3:
+        num_max = int(sys.argv[1])
+        trys = int(sys.argv[2])
+    
+    else:
+        trys = 10
+        num_max = 200
+    return trys, num_max
+
+def init_game() :
+    num_trys = 0
+    current = None
+    result = randint(0, num_max)
+    print(result)
+    return num_trys, current, result
+    
+def interface_initial_game(trys) :
+    #menu de incio
+    print ("¿¿Hola jugador, tu mision es adivinar el numero en el que piensa la maquina...podras hacerlo??")
+    #saludo = input ()
+    print ("recuerda que debes pensar bien tu pregunta.. solo dispones de " + str(trys) + " intentos para conseguirlo")
+    #advertencia = input ()
+    print ("")
+ 
+trys, num_max = config_game()
+num_trys, current, result = init_game()
+interface_initial_game(trys)
+
+
+
+
+def init_round(trys, num_trys, current) :
+    trys_left = trys - num_trys
+    print("Intentos: "+str(trys_left))
+    last_try = current
+    return last_try, trys_left
+
+
+
 while True: 
     trys_left = trys - num_trys
     print("Intentos: "+str(trys_left))
